@@ -22,7 +22,7 @@ export const App = () => {
           element={<SignUp isLogin={false} />}
         ></Route>
         <Route path="/login" exact element={<Login />}></Route>
-        <Route path="/startGame/:userId" exact element={<StartGame />}></Route>
+        <Route path="/startGame/:userId" exact element={<StartGame  />}></Route>
         <Route
           path="/gameResult/:userId/:gameId/:numOfPlayer"
           exact

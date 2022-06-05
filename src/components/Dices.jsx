@@ -67,13 +67,9 @@ export const Dices = ({
         <Grid.Row columns={1}>
           <Grid.Column>
             {!myTurn.value ? (
-              <Segment>
-                <Dimmer active>
-                  <Loader size="massive" />
-                </Dimmer>
-
-                <Image src="https://react.semantic-ui.com/images/wireframe/short-paragraph.png" />
-              </Segment>
+              <Button fluid loading>
+                Loading
+              </Button>
             ) : (
               <Button
                 disabled={numberOfClickes <= 0}

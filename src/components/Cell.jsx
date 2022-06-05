@@ -14,12 +14,12 @@ export const Cell = ({
 
   return (
     <div style={{ display: "flex" }}>
-      <Button fluid disabled={true}>
+      <Button fluid color={"blue"}>
         {name}
       </Button>
       <Button
         fluid
-        disabled={!canClick || name === "bonus"}
+        disabled={!myTurn.value || !canClick || name === "bonus"}
         onClick={(event) => {
           if (onClick()) {
             setMyScore(myScore + result + 35);

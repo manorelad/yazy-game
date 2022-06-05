@@ -136,6 +136,7 @@ export const Board = ({
   myScore,
   onRequest,
   gameId,
+  myTurn,
   userId,
   numOfPlayer,
 }) => {
@@ -175,7 +176,6 @@ export const Board = ({
     }
   };
   useEffect(() => {
-   
     setGameState({
       ones: gameState.ones.canClick
         ? { value: calcResult(diceResult, [isOnes]), canClick: true }
@@ -240,6 +240,7 @@ export const Board = ({
           <Grid.Row>
             <Grid.Column>
               <Cell
+                myTurn={myTurn}
                 isClicked={gameState.ones.canClick}
                 name="ones"
                 result={gameState.ones.value}
@@ -256,6 +257,7 @@ export const Board = ({
             </Grid.Column>
             <Grid.Column>
               <Cell
+                myTurn={myTurn}
                 isClicked={gameState.threeTimes.canClick}
                 name="3 times"
                 result={gameState.threeTimes.value}
@@ -270,6 +272,7 @@ export const Board = ({
           <Grid.Row>
             <Grid.Column>
               <Cell
+                myTurn={myTurn}
                 isClicked={gameState.twos.canClick}
                 name="twos"
                 result={gameState.twos.value}
@@ -286,6 +289,7 @@ export const Board = ({
             </Grid.Column>
             <Grid.Column>
               <Cell
+                myTurn={myTurn}
                 isClicked={gameState.fourTimes.canClick}
                 name="4 times"
                 result={gameState.fourTimes.value}
@@ -300,6 +304,7 @@ export const Board = ({
           <Grid.Row>
             <Grid.Column>
               <Cell
+                myTurn={myTurn}
                 isClicked={gameState.threes.canClick}
                 name="threes"
                 result={gameState.threes.value}
@@ -316,6 +321,7 @@ export const Board = ({
             </Grid.Column>
             <Grid.Column>
               <Cell
+                myTurn={myTurn}
                 isClicked={gameState.fullHouse.canClick}
                 name="full house"
                 result={gameState.fullHouse.value}
@@ -334,6 +340,7 @@ export const Board = ({
           <Grid.Row>
             <Grid.Column>
               <Cell
+                myTurn={myTurn}
                 isClicked={gameState.fours.canClick}
                 name="fours"
                 result={gameState.fours.value}
@@ -350,6 +357,7 @@ export const Board = ({
             </Grid.Column>
             <Grid.Column>
               <Cell
+                myTurn={myTurn}
                 isClicked={gameState.small.canClick}
                 name="small"
                 result={gameState.small.value}
@@ -364,6 +372,7 @@ export const Board = ({
           <Grid.Row>
             <Grid.Column>
               <Cell
+                myTurn={myTurn}
                 isClicked={gameState.fives.canClick}
                 name="fives"
                 result={gameState.fives.value}
@@ -380,6 +389,7 @@ export const Board = ({
             </Grid.Column>
             <Grid.Column>
               <Cell
+                myTurn={myTurn}
                 isClicked={gameState.large.canClick}
                 name="large"
                 result={gameState.large.value}
@@ -394,6 +404,7 @@ export const Board = ({
           <Grid.Row>
             <Grid.Column>
               <Cell
+                myTurn={myTurn}
                 isClicked={gameState.sixes.canClick}
                 name="sixes"
                 result={gameState.sixes.value}
@@ -410,6 +421,7 @@ export const Board = ({
             </Grid.Column>
             <Grid.Column>
               <Cell
+                myTurn={myTurn}
                 isClicked={gameState.yazy.canClick}
                 name="yazy"
                 result={gameState.yazy.value}
@@ -424,6 +436,7 @@ export const Board = ({
           <Grid.Row>
             <Grid.Column>
               <Cell
+                myTurn={myTurn}
                 isClicked={gameState.bonus.canClick}
                 name="bonus"
                 result={gameState.bonus.value}
@@ -434,6 +447,7 @@ export const Board = ({
             </Grid.Column>
             <Grid.Column>
               <Cell
+                myTurn={myTurn}
                 isClicked={gameState.any.canClick}
                 name="?"
                 result={gameState.any.value}

@@ -9,7 +9,7 @@ import axios from "axios";
 const BASE_URL = "http://localhost:8080";
 export const Game = () => {
   const [myScore, setMyScore] = useState(0);
-  const [opponentScore, setopponentScore] = useState(0);
+  const [opponentScore, setOpponentScore] = useState(0);
   const [numberOfClickes, setNumberOfClickes] = useState(3);
   let { userId, gameId, numOfPlayer } = useParams();
   const [diceResult, setDiceResult] = useState([
@@ -36,28 +36,34 @@ export const Game = () => {
     bonus: { value: 0, canClick: false },
     isFinish: false,
   });
-  const [myTurn, setMyTurn] = useState(numOfPlayer === "FIRST_PLAYER");
+  const [myTurn, setMyTurn] = useState({
+    value: numOfPlayer === "FIRST_PLAYER",
+  });
 
   useEffect(() => {
     const isMyTurn = async () => {
-      const { data } = await axios.get(
-        `${BASE_URL}/isMyTurn/${gameId}/${userId}`,
-        {
-          headers: {
-            "Access-Control-Allow-Origin": BASE_URL,
-          },
-        }
-      );
-      return data;
+      try {
+        const { data } = await axios.get(
+          `${BASE_URL}/isMyTurn/${gameId}/${userId}`,
+          {
+            headers: {
+              "Access-Control-Allow-Origin": BASE_URL,
+            },
+          }
+        );
+
+        let sum = 0;
+        Object.keys(data.yazy).forEach(
+          (key) => (sum += data.yazy[key].value ?? 0)
+        );
+        setOpponentScore(sum);
+        setMyTurn({ value: true });
+      } catch (err) {
+        setMyTurn({ value: false });
+      }
     };
 
-    isMyTurn()
-      .then((res) => {
-        setMyTurn({ value: true });
-      })
-      .catch((err) => {
-        setMyTurn({ value: false });
-      });
+    isMyTurn();
   }, [myTurn]);
   return (
     <div>
@@ -74,6 +80,7 @@ export const Game = () => {
           myScore={myScore}
           gameId={gameId}
           userId={userId}
+          myTurn={myTurn}
           numOfPlayer={numOfPlayer}
           onRequest={async (gameState) => {
             const move = {};
@@ -87,7 +94,7 @@ export const Game = () => {
                 };
               }
             });
-            move["isFinish"] = gameState["isFinish"];
+            move["isFinish"] = gameState.isFinish;
 
             try {
               const { data } = await axios.post(`${BASE_URL}/game/${gameId}`, {
@@ -97,19 +104,11 @@ export const Game = () => {
                   "Access-Control-Allow-Origin": BASE_URL,
                 },
               });
-
               if (data.yazy.isFinish) {
                 alert("Game Ended");
               } else {
-                let sum = 0;
-                Object.keys(data.yazy).forEach(
-                  (key) => (sum += data.yazy[key].value ?? 0)
-                );
-                setopponentScore(sum);
               }
-            } catch (err) {
-              alert(err);
-            }
+            } catch (err) {}
           }}
         />
         <br />

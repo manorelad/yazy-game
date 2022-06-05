@@ -9,10 +9,10 @@ const validateEmail = (email) => {
   return reg.test(email);
 };
 
-export const SignUp = ({ isLogin, handleHistory }) => {
-  const [firstName, setFirstName] = useState("elad");
-  const [lastName, setLastName] = useState("manor");
-  const [email, setEmail] = useState("example@gmail.com");
+export const SignUp = ({ isLogin }) => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
   let navigate = useNavigate();
   const onSumbit = async (event) => {
     if (
@@ -49,21 +49,21 @@ export const SignUp = ({ isLogin, handleHistory }) => {
         <Form.Field>
           <Label>First Name</Label>
           <Input
-            placeholder={firstName}
+            placeholder={"Enter Your First Name"}
             onInput={(event) => setFirstName(event.target.value)}
           />
         </Form.Field>
         <Form.Field>
           <Label>Last Name</Label>
           <Input
-            placeholder={lastName}
+            placeholder={"Enter Your Last Name"}
             onInput={(event) => setLastName(event.target.value)}
           />
         </Form.Field>
         <Form.Field>
-          <Label>Email Name</Label>
+          <Label>Email</Label>
           <Input
-            placeholder={email}
+            placeholder={"Enter Your Email"}
             onInput={(event) => setEmail(event.target.value)}
           />
         </Form.Field>
